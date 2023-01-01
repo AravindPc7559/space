@@ -1,80 +1,110 @@
 /* eslint-disable @next/next/no-img-element */
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FaGreaterThan, FaLessThan } from 'react-icons/fa'
 
-type Props = {}
-type TestimonialProp = {
-        id:number,
-        avatar:string,
-        designation:string,
-        message:string,
-        name:string
-}[]
+type Props = {
+    testimonial:{
+                 id:number,
+                avatar:string,
+                 designation:string,
+                 message:string,
+                 name:string
+        }[]
+}
 
-const Testimonial = (props: Props) => {
-
-const [testimonials , setTestimonials] = useState<TestimonialProp>()
-const [value, setValue] = useState(1);
-
-
-    useEffect(() => {
-        axios.get('https://naseers819.wixsite.com/website-5/_functions/webpageTestimonials').then((res) => {
-            setTestimonials(res.data)
-        })
-    },[value])
-   
-
+const Testimonial = ({testimonial}: Props) => {
+    const [value, setValue] = useState(0)
+    const[secondtesti, setSecondTesti] = useState(1)
   return (
-    <div className='w-full container mx-auto md:mt-10 my-10'>
-        <h1 className='text-3xl text-center md:text-start font-bold -tracking-normal'>Testimonial</h1>
+    <div>
 
-        {
-            testimonials?.splice(0,value).map((data) => {
-                return(
-                    <>
-                    <div className={`w-full h-auto ${data.id === 1 && 'bg-lime-300'} ${data.id === 2 && 'bg-orange-300'} ${data.id === 3 && 'bg-rose-300'} mt-6 flex-wrap`}>
+        <div className='ml-10'>
+        <h1 className='text-3xl text-center md:text-start font-bold -tracking-normal my-8'>Testimonial</h1>
+            <div className='w-full h-auto flex gap-10'>
+                <div className={`w-[70%] h-auto ${value === 0 && 'bg-lime-300'} ${value === 1 && 'bg-orange-300'} ${value === 2 && 'bg-rose-300'}`}>
+                <div className=' p-10 flex flex-col'>
+ <div className='max-w-[900px]'>
+ <h1 className='text-3xl'>{testimonial && testimonial[value].message}</h1>
+ </div>
+ <div className='flex'>
+ <div className='w-[70px] mt-9'>
+     <img src={testimonial && testimonial[value].avatar} className='rounded-full'  alt="" />
+ </div>
+ <div className='mt-12 ml-5'>
+     <h6>{testimonial && testimonial[value].name}</h6>
+<p className='text-xs'>{testimonial && testimonial[value].designation}</p>
+</div>
+</div>
+ </div>
+                </div>
+                <div className={`max-w-[30%] h-auto ${secondtesti === 0 && 'bg-lime-300'} ${secondtesti === 1 && 'bg-orange-300'} ${secondtesti === 2 && 'bg-rose-300'}`}>
+                <div className=' p-10 flex flex-col '>
+ <div className='max-w-[900px]'>
+ <h1 className='text-3xl'>{testimonial && testimonial[secondtesti].message}</h1>
+ </div>
+ <div className='flex'>
+ <div className='w-[70px] mt-9'>
+     <img src={testimonial && testimonial[secondtesti].avatar} className='rounded-full'  alt="" />
+ </div>
+ <div className='mt-12 ml-5'>
+     <h6>{testimonial && testimonial[secondtesti].name}</h6>
+<p className='text-xs'>{testimonial && testimonial[secondtesti].designation}</p>
+</div>
+</div>
+ </div>
+                </div>
+            </div>
+        </div>
 
-<div className=' p-10 flex flex-col'>
-<div className='max-w-[900px]'>
-<h1 className='text-3xl'>{data.message}</h1>
-</div>
-<div className='flex'>
-<div className='w-[70px] mt-9'>
-    <img src={data.avatar} className='rounded-full'  alt="" />
-</div>
-<div className='mt-12 ml-5'>
-    <h6>{data.name}</h6>
-<p className='text-xs'>{data.designation}</p>
-</div>
-</div>
-</div>
-</div>
-<div className='flex mt-4'>
+
+        {/* pagination */}
+        <div className='flex mt-4 ml-10 my-10'>
 <div className=' bg-gray-100 shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' >
-<FaLessThan  className='' onClick={() => setValue(value-1)}/>
+ <FaLessThan  className='' onClick={() => {
+    if(value === 0 || secondtesti === 0){
+        setValue(0)
+        setSecondTesti(1)
+    }else{
+        setValue(value-1)
+        setSecondTesti(secondtesti-1)
+    }
+}
+}
+/>
 </div>
 <div className='flex gap-6 px-4'>
-<div className={`${data.id === 1 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
-<p onClick={() => setValue(0)}>1</p>
-</div>
-<div className={`${data.id === 2 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
-<p onClick={() => setValue(1)}>2</p>
-</div>
-<div className={`${data.id === 3 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
-<p onClick={() => setValue(2)}>3</p>
-</div>
-</div>
-<div className=' bg-gray-100 shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer'>
-<FaGreaterThan  className='' onClick={() => setValue(value+1)}/>
-</div>
-</div>
-                    </>
-                )
-            })
-        }
-        </div>
-    )
-    }
+ <div className={`${value === 0 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
+ <p onClick={() => {
+    setValue(0)
+    setSecondTesti(1)
+ }}>1</p>
+ </div>
+ <div className={`${value === 1 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
+ <p onClick={() => {setValue(1)
+setSecondTesti(2)
+}}>2</p>
+ </div>
+ <div className={`${value === 2 ? ' bg-black text-white shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer' : 'mt-3 cursor-pointer'}`} >
+ <p onClick={() => {setValue(2)
+setSecondTesti(0)
+}}>3</p>
+ </div>
 
-    export default Testimonial
+ </div>
+ <div className=' bg-gray-100 shadow-xl rounded-full flex items-center justify-center my-auto p-3 cursor-pointer'>
+ <FaGreaterThan  className='' onClick={() => {
+    if(value === 2 || secondtesti === 2){
+        setValue(2)
+        setSecondTesti(0)
+    }else{
+        setValue(value+1)
+        setSecondTesti(secondtesti+1)
+    }
+}}/>
+ </div>
+ </div>
+    </div>
+  )
+}
+
+export default Testimonial
