@@ -37,7 +37,7 @@ const Testimonial = ({testimonial}: Props) => {
 </div>
  </div>
                 </div>
-                <div className={`max-w-[30%] hidden h-auto ${secondtesti === 0 && 'bg-red-300'} ${secondtesti === 1 && 'bg-orange-300'} ${secondtesti === 2 && 'bg-rose-300'}`}>
+                <div className={`max-w-[30%] hidden md:flex h-auto ${secondtesti === 0 && 'bg-red-300'} ${secondtesti === 1 && 'bg-orange-300'} ${secondtesti === 2 && 'bg-rose-300'}`}>
                 <div className=' p-10 flex flex-col '>
  <div className='max-w-[900px]'>
  <h1 className='text-3xl'>{testimonial && testimonial[secondtesti]?.message}</h1>
