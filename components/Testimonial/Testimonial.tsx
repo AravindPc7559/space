@@ -18,37 +18,37 @@ const Testimonial = ({testimonial}: Props) => {
   return (
     <div>
 
-        <div className='ml-10'>
+        <div className='md:ml-10 mx-2'>
         <h1 className='text-3xl text-center md:text-start font-bold -tracking-normal my-8'>Testimonial</h1>
             <div className='w-full h-auto flex gap-10'>
-                <div className={`w-[70%] h-auto ${value === 0 && 'bg-lime-300'} ${value === 1 && 'bg-orange-300'} ${value === 2 && 'bg-rose-300'}`}>
+                <div className={`w-full md:w-[70%] h-auto ${value === 0 && 'bg-red-300`'} ${value === 1 && 'bg-orange-300'} ${value === 2 && 'bg-rose-300'}`}>
                 <div className=' p-10 flex flex-col'>
  <div className='max-w-[900px]'>
- <h1 className='text-3xl'>{testimonial && testimonial[value].message}</h1>
+ <h1 className='text-3xl'>{testimonial && testimonial[value]?.message}</h1>
  </div>
  <div className='flex'>
  <div className='w-[70px] mt-9'>
-     <img src={testimonial && testimonial[value].avatar} className='rounded-full'  alt="" />
+     <img src={testimonial && testimonial[value]?.avatar} className='rounded-full'  alt="" />
  </div>
  <div className='mt-12 ml-5'>
-     <h6>{testimonial && testimonial[value].name}</h6>
-<p className='text-xs'>{testimonial && testimonial[value].designation}</p>
+     <h6>{testimonial && testimonial[value]?.name}</h6>
+<p className='text-xs'>{testimonial && testimonial[value]?.designation}</p>
 </div>
 </div>
  </div>
                 </div>
-                <div className={`max-w-[30%] h-auto ${secondtesti === 0 && 'bg-lime-300'} ${secondtesti === 1 && 'bg-orange-300'} ${secondtesti === 2 && 'bg-rose-300'}`}>
+                <div className={`max-w-[30%] hidden h-auto ${secondtesti === 0 && 'bg-red-300'} ${secondtesti === 1 && 'bg-orange-300'} ${secondtesti === 2 && 'bg-rose-300'}`}>
                 <div className=' p-10 flex flex-col '>
  <div className='max-w-[900px]'>
- <h1 className='text-3xl'>{testimonial && testimonial[secondtesti].message}</h1>
+ <h1 className='text-3xl'>{testimonial && testimonial[secondtesti]?.message}</h1>
  </div>
  <div className='flex'>
  <div className='w-[70px] mt-9'>
-     <img src={testimonial && testimonial[secondtesti].avatar} className='rounded-full'  alt="" />
+     <img src={testimonial && testimonial[secondtesti]?.avatar} className='rounded-full'  alt="" />
  </div>
  <div className='mt-12 ml-5'>
-     <h6>{testimonial && testimonial[secondtesti].name}</h6>
-<p className='text-xs'>{testimonial && testimonial[secondtesti].designation}</p>
+     <h6>{testimonial && testimonial[secondtesti]?.name}</h6>
+<p className='text-xs'>{testimonial && testimonial[secondtesti]?.designation}</p>
 </div>
 </div>
  </div>
